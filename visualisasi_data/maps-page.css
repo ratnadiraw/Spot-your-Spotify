@@ -1,0 +1,45 @@
+#container {
+	font-family: 'Montserrat', sans-serif;
+}
+
+input {
+	font-family: 'Montserrat', sans-serif;	
+}
+
+#pickdate {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+#trenddate {
+	margin-left: 15px;
+	border: 2px solid #0ABE33;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+#maphistory {
+	display: table;
+	width: 80%;
+	margin: auto;
+	margin-top: 15px;
+}
+
+.historyItem {
+	display: inline-flex;
+	align-items: center;
+}
+
+.historyColor {
+	width: 20px;
+	height: 13px;
+}
+
+.historyFont {
+	margin-top: 7.5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 7.5px;
+	font-size: 15px;
+}

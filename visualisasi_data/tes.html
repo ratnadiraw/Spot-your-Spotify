@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:margin-top="http://www.w3.org/1999/xhtml">
+<link href="dist/semantic.css" media="all" rel="Stylesheet" type="text/css" />
+<link href="dist/components/modal.css" media="all" rel="Stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    .ui.modal > .header{
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        background-color: #191414 !important;
+        color: #1db954 !important;
+    }
+
+    .ui.modal > .content{
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        background-color: #191414 !important;
+        color: #1db954 !important;
+    }
+</style>
+<body>
+<button class="ui button yellow create_btn" type="button" id="test">Create</button>
+<div class="ui fullscreen modal test">
+    <i class="close icon"></i>
+    <div class="header">
+        <h1>
+            Indonesia Spotify Chart</h1>
+    </div>
+    <div class="image content">
+
+        <!--<div class="ui medium image">-->
+            <div id="chart_div" style="height: 500px; width: 500px"></div>
+        <!--</div>-->
+        <div class="description">
+            <div class="ui two column grid">
+                <div class="stretched row">
+                    <div class="column">
+                        <!--<div class="ui segment" style="height: 100px">-->
+                            <iframe src="https://open.spotify.com/embed/track/7KXjTSCq5nL1LoYtL7XAwS" width="100%" height="90" frameborder="0" allowtransparency="true" id="songplayer"></iframe>
+                        <!--</div>-->
+                        <div class="ui segment" style="height: 300px; margin-top:10%";>
+                            <div id="chart_div_2" style="width:350px; height:280px"></div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui segment" style="height: 60px">
+                            Info Lagu
+                        </div>
+                        <div class="ui segment" style="height: 300px; margin-top:15%";>
+                            <div id="chart_div3" style="width:350px; height:280px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="actions">-->
+        <!--<div class="ui black deny button">-->
+            <!--Nope-->
+        <!--</div>-->
+        <!--<div class="ui positive right labeled icon button">-->
+            <!--Yep, that's me-->
+            <!--<i class="checkmark icon"></i>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+</body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $tes = 1;
+    $on = 0;
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+        if ($tes>3){
+            var data = google.visualization.arrayToDataTable([
+                ['City', '2010 Population',],
+                ['New York City, NY', 8175000],
+                ['Los Angeles, CA', 3792000],
+                ['Chicago, IL', 2695000],
+                ['Houston, TX', 2099000],
+
+                ['Los Angeles, CA', 3792000],
+                ['Chicago, IL', 2695000],
+                ['Houston, TX', 2099000],
+                ['Los Angeles, CA', 3792000],
+                ['Chicago, IL', 2695000],
+                ['Houston, TX', 2099000],
+                ['Los Angeles, CA', 3792000],
+                ['Chicago, IL', 2695000],
+                ['Houston, TX', 2099000],
+
+                ['Los Angeles, CA', 3792000],
+                ['Chicago, IL', 2695000],
+                ['Houston, TX', 2099000],
+                ['Los Angeles, CA', 3792000],
+                ['Chicago, IL', 2695000],
+                ['Houston, TX', 2099000],
+                ['Philadelphia, PA', 1526000]
+            ]);
+        } else  {
+            var data = google.visualization.arrayToDataTable([
+                ['City', '2010 Population',],
+                ['New York City, NY', 8175000],
+                ['Los Angeles, CA', 3792000],
+                ['Chicago, IL', 2695000],
+                ['Houston, TX', 2099000]
+            ]);
+        }
+
+        var options = {
+            title: 'Population of Largest U.S. Cities',
+            chartArea: {width: '50%', height:'100%'},
+            hAxis: {
+                // title: 'Total Population',
+                minValue: 0
+            },
+            vAxis: {
+
+                textStyle:{color: '#FFF'}
+            },
+            annotations: {
+                textStyle: {
+                    // The color of the text.
+                    color: 'white'
+                }
+            },
+            colors: ['#1db954'],
+            height: '500',
+            width: '500',
+            backgroundColor: 'transparent',
+            legend: { position: "none" }
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        function selectHandler() {
+            var selectedItem = chart.getSelection()[0];
+            if (selectedItem) {
+                var topping = data.getValue(selectedItem.row, 0);
+                document.getElementById("songplayer").src="https://open.spotify.com/embed/track/5k38wzpLb15YgncyWdTZE4";
+                alert('The user selected ' + topping);
+                $on++;
+                drawChart1();
+            }
+        }
+
+        google.visualization.events.addListener(chart, 'select', selectHandler);
+        chart.draw(data, options);
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart1);
+
+        function drawChart1() {
+            if ($on>1){
+
+                var data = google.visualization.arrayToDataTable([
+                    ['Age', 'Weight'],
+                    [ 8,      12],
+                    [ 4,      5.5],
+                    [ 11,     14],
+                    [ 4,      5],
+                    [ 3,      3.5],
+                    [ 6.5,    7]
+                ]);
+            } else {
+                var data = google.visualization.arrayToDataTable([
+                    ['Age', 'Weight'],
+                    [ 8,      12]
+                ]);
+            }
+
+            var options = {
+                title: 'Age vs. Weight comparison',
+                chartArea: {width: '80%', height:'80%'},
+                annotations: {
+                    textStyle: {
+                        // The color of the text.
+                        color: 'white'
+                    }
+                },
+                colors: ['#1db954'],
+                height: '280',
+                width: '350',
+                hAxis: {title: 'Age', minValue: 0, maxValue: 15},
+                vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
+                legend: 'none'
+            };
+
+            var chart = new google.visualization.ScatterChart(document.getElementById('chart_div_2'));
+
+            chart.draw(data, options);
+        }
+
+        google.charts.setOnLoadCallback(drawChart2);
+
+        function drawChart2() {
+            if ($on>1){
+
+                var data = google.visualization.arrayToDataTable([
+                    ['Age', 'Weight'],
+                    [ 8,      12],
+                    [ 4,      5.5],
+                    [ 11,     14],
+                    [ 4,      5],
+                    [ 3,      3.5],
+                    [ 6.5,    7]
+                ]);
+            } else {
+                var data = google.visualization.arrayToDataTable([
+                    ['Age', 'Weight'],
+                    [ 8,      12]
+                ]);
+            }
+
+            var options = {
+                title: 'Age vs. Weight comparison',
+                chartArea: {width: '80%', height:'80%'},
+                annotations: {
+                    textStyle: {
+                        // The color of the text.
+                        color: 'white'
+                    }
+                },
+                colors: ['#1db954'],
+                height: '280',
+                width: '350',
+                hAxis: {title: 'Age', minValue: 0, maxValue: 15},
+                vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
+                legend: 'none'
+            };
+
+            var chart = new google.visualization.ScatterChart(document.getElementById('chart_div3'));
+
+            chart.draw(data, options);
+        }
+    }
+    $(function(){
+        $("#test").click(function(){
+            drawBasic();
+            $tes++;
+            $(".test").modal('show');
+        });
+        $(".test").modal({
+
+            blurring: true,
+            closable: true
+        });
+    });
+</script>
+<script src="dist/semantic.js"></script>
+<script src="dist/components/modal.js"></script>
+</html>
